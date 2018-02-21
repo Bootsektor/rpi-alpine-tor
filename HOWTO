@@ -1,6 +1,6 @@
-How to build image:
+How to build the image:
 
-1: create torrc
+1: create sample torrc for use TOR inside local network
 
 cat << EOM >> torrc
 Log notice stdout
@@ -81,11 +81,10 @@ docker build -t <insert_name_of_your_liking> .
 
 4: fetch some coffee
 
-5: run newly created image
-# run a shell inside your image:
+5: run newly created image and run a shell inside your image:
 docker run -it insert_name_of_your_liking /bin/sh
 
-# run tor in your image, expose your tor for your local network and use it:
+# run tor in your image, expose your TOR for your local network and use it:
 docker run -d -p $(hostname -I|awk '{print $1}'):9050:9050 insert_name_of_your_liking
 curl -s --socks5 $(hostname -I|awk '{print $1}'):9050 http://whatsmyip.de|grep h3|sed "s/<[^>]*>//g"
  
